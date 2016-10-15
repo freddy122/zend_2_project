@@ -27,27 +27,6 @@ class IndexController extends AbstractActionController
 			// echo $row->getLibTravail();
 			// echo '<br />';
 		}
-		 //$dd = new Doc();
-         //$aa =  $this->getServiceLocator()->get('Monappli\Model\Doc')->resultss();
-         // foreach($aa as $res){
-            // echo '<pre>';
-               // print_r($res);
-            // echo '</pre>';
-         // }
-         
-         // $resu[] = array(
-               // 'id'    =>$row->id,
-               // 'title' =>$row->title,
-               // 'artist'=>$row->artist,
-             // );
-         // }
-         // echo '<pre>';
-            // print_r(json_encode($resu));
-         // echo '</pre>';
-         // echo '<pre>';
-            // print_r($aa->count());
-         // echo '</pre>';
-		 // $dd = new Doc();
       $aa =  $this->getServiceLocator()->get('Monappli\Model\Doc')->querys();
         
          return new ViewModel();
