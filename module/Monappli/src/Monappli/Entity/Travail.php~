@@ -1,0 +1,42 @@
+<?php
+
+namespace Monappli\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Travail
+ *
+ * @ORM\Table(name="travail", indexes={@ORM\Index(name="fk_pers_trav", columns={"pers_id"})})
+ * @ORM\Entity
+ */
+class Travail
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="travail_id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $travailId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lib_travail", type="string", length=255, nullable=true)
+     */
+    private $libTravail;
+
+    /**
+     * @var \Monappli\Entity\Pers
+     *
+     * @ORM\ManyToOne(targetEntity="Monappli\Entity\Pers")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pers_id", referencedColumnName="id")
+     * })
+     */
+    private $pers;
+
+
+}

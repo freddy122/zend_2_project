@@ -1,0 +1,50 @@
+<?php
+
+namespace Monappli\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Infos
+ *
+ * @ORM\Table(name="infos")
+ * @ORM\Entity
+ */
+class Infos
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero_client", type="string", length=80, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $numeroClient;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type_document", type="string", length=255, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $typeDocument;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomchamp", type="string", length=255, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $nomchamp;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="valeurchamp", type="string", length=255, nullable=true)
+     */
+    private $valeurchamp;
+
+
+}

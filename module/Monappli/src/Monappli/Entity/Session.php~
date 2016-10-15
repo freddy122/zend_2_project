@@ -1,0 +1,55 @@
+<?php
+
+namespace Monappli\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Session
+ *
+ * @ORM\Table(name="session")
+ * @ORM\Entity
+ */
+class Session
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id", type="string", length=32, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $id = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=32, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $name = '';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="modified", type="integer", nullable=true)
+     */
+    private $modified;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="lifetime", type="integer", nullable=true)
+     */
+    private $lifetime;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="data", type="text", nullable=true)
+     */
+    private $data;
+
+
+}

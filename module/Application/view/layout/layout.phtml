@@ -1,0 +1,90 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('Mon '. $this->translate('Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/ui/css/jquery.ui.all.css')
+                        ->prependStylesheet($this->basePath() . '/css/dataTables.bootstrap.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/jquery.dataTables.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/js/fonction.js')
+            ->prependFile($this->basePath() . '/ui/js/jquery.ui.datepicker.js')
+            ->prependFile($this->basePath() . '/ui/js/jquery.ui.widget.js')
+            ->prependFile($this->basePath() . '/ui/js/jquery.ui.core.js')
+            ->prependFile($this->basePath() . '/js/jquery.dataTables.min.js')
+            ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+            ->prependFile($this->basePath() . '/js/jquery.min.js')
+            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php /*echo $this->basePath('img/zf2-logo.png')*/ ?>" />&nbsp;<?php echo $this->translate('Accueil ') ?></a>
+                </div>
+                <div class="collapse navbar-collapse">
+                     <ul class="nav navbar-nav">
+                        <?php 
+                           echo $this->navigation('navigation')->menu()->setMinDepth(0)->setMaxDepth(0)->setUlClass('nav navbar-nav');
+                        ?>
+						
+                     </ul>
+                     
+					 
+					 <ul class="nav navbar-nav">
+                       <!--li><a href="">Rechercher</a></li-->
+                       <li class="dropdown">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Exemple 2 sorte de CRUD<span class="caret"></span></a>
+                           <ul class="dropdown-menu">
+                              <li><a href="<?php echo $this->url('monappli',array('action' => 'index'));?>">CRUD avec jquery AJAX</a></li>
+                              <li><a href="#">CRUD avec Doctrine ORM</a></li>
+                              <!--li><a href="#">Something else here</a></li>
+                              <li role="separator" class="divider"></li>
+                              <li><a href="#">Separated link</a></li-->
+                           </ul>
+                       </li>
+                     </ul>
+					 
+					 <ul class="nav navbar-nav">
+						Une Application pour le gestion des Etudiants
+                     </ul>
+                     
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <?php
+             echo $this->navigation('navigation') // <-- Update this!!
+                       ->breadcrumbs()
+                       ->setMinDepth(0)
+                       ->setPartial('partial/breadcrumb.phtml');
+             ?>
+            <?php echo $this->content; ?>
+            <hr>
+            <footer>
+                <p>&copy; <?php echo date('Y') ?> by Orimbato basé sur le tutoriel  tech. <?php //echo $this->translate('All rights reserved.') ?></p>
+            </footer>
+        </div> <!-- /container -->
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

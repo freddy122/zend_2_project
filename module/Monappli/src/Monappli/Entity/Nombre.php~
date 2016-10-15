@@ -1,0 +1,48 @@
+<?php
+
+namespace Monappli\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Nombre
+ *
+ * @ORM\Table(name="nombre")
+ * @ORM\Entity
+ */
+class Nombre
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero_client", type="string", length=80, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $numeroClient;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type_document", type="string", length=255, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $typeDocument;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nombre_pages", type="integer", nullable=false)
+     */
+    private $nombrePages = '0';
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="moving", type="boolean", nullable=false)
+     */
+    private $moving = '0';
+
+
+}
