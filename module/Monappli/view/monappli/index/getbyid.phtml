@@ -1,37 +1,76 @@
+<?php
+foreach($res_aff as $uu){
+?>
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title" id="myModalLabel">
+			<?php 
+				echo "
+					Modification du données pour le client <font color='blue'>".$uu['nom_client']."</font> dont l'identifiant est <font color='blue'>".$uu['numero_client']."</font>
+				";
+			?>
+		</h4>
+		</div>
+		<div class="modal-body" id="modif_client">
+			
+			<table class="table table-striped">
+
+
+				<tr>
+					<td>Identifiant du client</td>
+					<td><input type="text" class="form-control" id="id_cli_mod"   value="<?php echo $uu["numero_client"]; ?>" readonly></td>
+				</tr>
+				<tr>
+					<td>Nom du client</td>
+					<td><input type="text" class="form-control" id="nom_cli_mod"  value="<?php echo $uu["nom_client"]; ?>" ></td>
+				</tr>
+				<tr>
+					<td>Date de Numérisation</td>
+					<td><input type="text" class="form-control" id="dt_num_mod"  value="<?php  
+					$rsdt 	  = new DateTime($uu["date_numerisation"]);
+					$date_numerisation = date_format($rsdt,'d-m-Y');
+					echo $date_numerisation; ?>"></td>
+				</tr>
+				
+				<?php
+					}
+				?>
+
+			</table>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" id="btn_modifier" onclick="modifs()">Modifier </button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+		</div>
+		</div>
+
+	</div>
+</div>
+
 <script>
 	$(document).ready(function(){
 			$("#dt_num_mod").datepicker({
 				dateFormat:"dd-mm-yy"
 			});
-			var num_cli = $("#id_cli_mod").val();
-			var nom_cli = $("#nom_cli_mod").val();
-			var dt_num = $("#dt_num_mod").val();
-			$("#btn_modifier").click(function(){
-				alert(num_cli+'aaa'+nom_cli+'--'+dt_num);
-				
-			})
 	})
+	function modifs(){
+		var num_cli = $("#id_cli_mod").val();
+		var nom_cli = $("#nom_cli_mod").val();
+		var dt_num = $("#dt_num_mod").val();
+		$.ajax({
+			type:"POST",
+			url:"monappli/modifier",
+			data:{
+				num_cli:num_cli,
+				nom_cli:nom_cli,
+				dt_num:dt_num
+			},
+			success:function(data){
+				alert('modification effectué');
+				$("#annul_ajout").trigger("click");
+				location.reload();
+			}
+		})
+	}
 </script>
-
-<table class="table table-striped">
-	<tr>
-		<td>Identifiant du client</td>
-		<td><input type="text" class="form-control" id="id_cli_mod" value="<?php echo $res_aff['numero_client'] ?>"></td>
-	</tr>
-	<tr>
-		<td>Nom du client</td>
-		<td><input type="text" class="form-control" id="nom_cli_mod" value="<?php echo $res_aff['nom_client'] ?>"></td>
-	</tr>
-	<tr>
-		<td>Date de Numérisation</td>
-		<td><input type="text" class="form-control" id="dt_num_mod" value="<?php  
-		$uu 	  = new DateTime($res_aff['date_numerisation']);
-		$date_numerisation = date_format($uu,'d-m-Y');
-		echo $date_numerisation; ?>"></td>
-	</tr>
-</table>
-<div class="modal-footer">
-		<button type="button" class="btn btn-primary" id="btn_modifier">Modifier </button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-        
-      </div>
