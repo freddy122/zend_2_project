@@ -74,10 +74,32 @@
 		$statement = $this->db->query($sql);
 		return $statement->execute();
 	}
+	
+	public function modifier($id_cli,$nom_cli,$date_numerisation)
+	{
+		$sql = "
+			UPDATE `app_zend`.`dossier`
+			SET 
+			  `nom_client` = '".$nom_cli."',
+			  `date_numerisation` = '".$date_numerisation."'
+			WHERE `numero_client` = '".$id_cli."';
+		";
+		$statement = $this->db->query($sql);
+		return $statement->execute();
+	}
+	
+	public function supprimer($id){
+		$sql = "
+			DELETE
+			FROM `app_zend`.`dossier`
+			WHERE `numero_client` = '".$id."';
+		";
+		$statement = $this->db->query($sql);
+		return $statement->execute();
+	}
 	 
 	 
 	 public function querys(){
-		//$adapt       = $this->db;
 		$sql = "
 			SELECT 	a.numero_client , UPPER(d.nom_client) AS nom_client, d.date_numerisation, i.date_integration
 				,CASE WHEN a.nombre_pages IS NULL THEN 0 ELSE a.nombre_pages END AS nb_conventions
