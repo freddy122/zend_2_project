@@ -12,26 +12,11 @@ use Zend\Db\ResultSet\ResultSet;
 
 class IndexController extends AbstractActionController
 {
-    
-	public function __construct(){
-		// $model_doc = new Doc();
-		// print_r($model_doc);
-	}
+
     public function indexAction()
     {
-         
-		$em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-		$data = $em->getRepository('Monappli\Entity\travail')->findAll();
-		foreach($data as $key=>$row)
-		{
-			// echo $row->getLibTravail();
-			// echo '<br />';
-		}
-      $aa =  $this->getServiceLocator()->get('Monappli\Model\Doc')->querys();
-        
-         return new ViewModel();
+        return new ViewModel();
     }
-    
     
     public function getdataAction()
     {
@@ -69,26 +54,36 @@ class IndexController extends AbstractActionController
 	public function getbyidAction(){
 		$ncli      = $this->getRequest()->getPost('id_c');
 		$res_byId  =  $this->getServiceLocator()->get('Monappli\Model\Doc')->afficherparId($ncli);
-		$arr_resu = array();
+		$arr_resu  = array();
 		foreach($res_byId as $resu){
 			array_push($arr_resu,$resu);
 		}
-		$viewModel = new ViewModel(array("res_aff"=>$resu));
+		$viewModel = new ViewModel(array("res_aff"=>$arr_resu));
 		$viewModel->setVariables(array('key' => 'value'))
                   ->setTerminal(true);
 		return $viewModel;
 	}
 	
 	public function modifierAction(){
-		
-		
-		$viewModel = new ViewModel(array("res"=>"aaa"));
+		$ncli      = $this->getRequest()->getPost('num_cli');
+		$nom_cli   = $this->getRequest()->getPost('nom_cli');
+		$dt_num    = $this->getRequest()->getPost('dt_num');
+		$uu 	  = new \DateTime($dt_num);
+		$date_numerisation = date_format($uu,'Y-m-d h:i:s');
+		$res_byId  =  $this->getServiceLocator()->get('Monappli\Model\Doc')->modifier($ncli,$nom_cli,$date_numerisation);
+		$viewModel = new ViewModel();
 		$viewModel->setVariables(array('key' => 'value'))
                   ->setTerminal(true);
 		return $viewModel;
-		
 	}
-
-
+	
+	public function SupprimerAction(){
+		$ncli   = $this->getRequest()->getPost('id_c');
+		$res_byId  =  $this->getServiceLocator()->get('Monappli\Model\Doc')->supprimer($ncli);
+		$viewModel = new ViewModel();
+		$viewModel->setVariables(array('key' => 'value'))
+                  ->setTerminal(true);
+		return $viewModel;
+	}
 }
 
