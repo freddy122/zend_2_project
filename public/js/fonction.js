@@ -19,8 +19,6 @@ $(document).ready(function(){
 				'sPrevious': 'Pr&eacutec&eacutedent'
 			},
 		},
-		//"scrollX" : true,
-			
 		"iDisplayLength": 10,
 		"iDisplayStart": 0,
 		"ajax": {
@@ -35,11 +33,8 @@ $(document).ready(function(){
 				dateFormat:"dd-mm-yy"
 	});
    $("#my_data tbody").on('click','#modif_r',function(){
-		// var resu = table_res.row($(this)).data();
 		var resu = table_res.row( $(this).parents('tr') ).data();
-		//alert(resu[0]);
-		//$("#modif_client").load("monappli/getbyid");
-		$("#myModalLabel").html("Modification du données pour le client <font color='blue'>"+resu[1]+"</font> dont l'identifiant est <font color='blue'>"+resu[0]);
+		$("#myModalLabel").html();
 		$.ajax({
 			type:"POST",
 			url:"monappli/getbyid",
@@ -47,16 +42,33 @@ $(document).ready(function(){
 				id_c : resu[0]
 			},
 			success:function(resu){
-				$("#modif_client").html(resu);
+				$("#myModal").html(resu);
 			}
 		})
+   }) 
+   
+   $("#my_data tbody").on('click','#suppr_r',function(){
+		var resu = table_res.row( $(this).parents('tr') ).data();
+		if(confirm("Voulez vous supprimer le client "+resu[1]))
+		{
+			$.ajax({
+				type:"POST",
+				url:"monappli/supprimer",
+				data:{
+					id_c : resu[0]
+				},
+				success:function(resu){
+					//$("#myModal").html(resu);
+					alert('Suppression effectué');
+					$("#annul_ajout").trigger("click");
+					location.reload();
+				}
+			})
+		}
    })
    
    
+   $("#my_doctrine").DataTable();
    
-   // $("#ajout_cl").html("monappli/ajouter");
    
-   // click(function(){
-	
-   // })
 })
