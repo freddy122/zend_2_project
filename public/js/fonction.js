@@ -69,6 +69,8 @@ $(document).ready(function(){
    
    
    $("#my_doctrine").DataTable();
-   
+   $("#exporter_").click(function(){
+		window.location.href = "monappli/export";
+   })
    
 })
